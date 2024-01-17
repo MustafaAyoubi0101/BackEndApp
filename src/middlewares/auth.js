@@ -6,7 +6,10 @@ const debug = require('debug')("app:main");
 async function isLoggined(req,res,next){
   const tokenBearer = req.header("Authorization");
   const token = tokenBearer?.slice(7, );
-  if(!token) res.status(401).send('access denied');
+  if(!token){
+    res.status(401).send('access denied');
+    return;
+  } 
   debug(token)
   try{
     const decoded = jwt.verify(token, config.get('jwt_key'));
@@ -14,9 +17,7 @@ async function isLoggined(req,res,next){
     req.user = user;
     next();
   }catch(ex){
-    debug(token)
-    await res.status(400).send('invalid token');
-    return
+    res.status(401).send('invalid token');
   }
 }
 
