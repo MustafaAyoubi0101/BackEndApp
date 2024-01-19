@@ -2,20 +2,16 @@ const expressValidator = require('express-validator');
 const check = expressValidator.check;
 
 module.exports = new class {
-  expensesValidator() {
+  savingsValidator() {
     return [
-      check('expensesAmount')
+      check('savingAmount')
         .not()
         .isEmpty()
-        .withMessage('expenses amount is invalid'),
-      check('category')
+        .withMessage('saving amount is invalid'),
+      check('savingMethod')
         .not()
         .isEmpty()
-        .withMessage('category cant be empty'),
-      check('paymentMethod')
-        .not()
-        .isEmpty()
-        .withMessage('Payment method cant be empty'),
+        .withMessage('Saving method cant be empty'),
       check('date')
         .not()
         .isEmpty()

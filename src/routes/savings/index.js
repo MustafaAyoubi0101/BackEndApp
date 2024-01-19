@@ -5,31 +5,31 @@ const validator = require('./validator');
 
 router.get(
     '/',
-    controller.getExpenses
+    controller.getSavings
 )
 
 router.get(
     '/:id',
-    controller.getExpense
+    controller.getSaving
 )
 
 router.post(
     '/',
-    validator.expensesValidator(),
+    validator.savingsValidator(),
     controller.validate,
-    controller.createExpenses
+    controller.createSavings
 )
 
 router.put(
     '/',
-    validator.expensesValidator(),
+    validator.savingsValidator(),
     controller.validate,
-    controller.updateExpenses
+    controller.updateSaving
 )
 
 router.delete(
     '/',
-    controller.removeExpenses
+    controller.removeSaving
 )
 
 module.exports = router;

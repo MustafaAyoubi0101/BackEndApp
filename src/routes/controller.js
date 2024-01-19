@@ -3,6 +3,7 @@ const {validationResult} = require('express-validator');
 const User = require('./../models/user');
 const Income = require('../models/income');
 const Expenses = require('../models/expenses');
+const Savings = require('../models/savings');
 
 module.exports = class {
   constructor() {
@@ -10,6 +11,7 @@ module.exports = class {
     this.User = User;
     this.Income = Income;
     this.Expenses = Expenses;
+    this.Savings = Savings;
   }
 
   validationBody(req,res){
