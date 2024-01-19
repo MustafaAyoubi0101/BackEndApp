@@ -6,6 +6,7 @@ const adminRouter = require('./admin');
 const { isLoggined, isAdmin } = require('./../middlewares/auth')
 const error = require('./../middlewares/error');
 const routerIncome = require('../routes/income')
+const routerExpenses = require('../routes/expenses')
 
 router.use('/auth', authRouter);
 
@@ -13,6 +14,7 @@ router.use('/user', isLoggined, userRouter);
 router.use('/admin', isLoggined, isAdmin, adminRouter);
 
 router.use('/income', isLoggined, routerIncome)
+router.use('/expenses', isLoggined, routerExpenses)
 
 router.use(error);
 
