@@ -10,6 +10,7 @@ const routerExpenses = require('../routes/expenses')
 const routerSavings = require('../routes/savings')
 const routerAccounts = require('../routes/accounts')
 const routerCategories = require('../routes/categories')
+const routerPaymentMethods = require('../routes/paymentMethods')
 
 router.use('/auth', authRouter);
 
@@ -21,6 +22,7 @@ router.use('/expenses', isLoggined, routerExpenses)
 router.use('/savings', isLoggined, routerSavings)
 router.use('/accounts', isLoggined, routerAccounts)
 router.use('/categories', isLoggined, routerCategories)
+router.use('/paymentMethods', isLoggined, routerPaymentMethods)
 
 router.use(error);
 
