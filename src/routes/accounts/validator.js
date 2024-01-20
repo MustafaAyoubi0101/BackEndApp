@@ -8,10 +8,6 @@ module.exports = new class {
         .not()
         .isEmpty()
         .withMessage('Account name is invalid'),
-      check('type')
-        .not()
-        .isEmpty()
-        .withMessage('type cant be empty'),
     ]
   }
 }

@@ -18,13 +18,13 @@ module.exports = new (class extends controller {
   }
 
   async createAccount(req, res) {
-    const account = await this.Account(_.pick(req.body, ["user_id", "accountName", "type"]))
+    const account = await this.Account(_.pick(req.body, ["user_id", "accountName"]))
     await account.save();
 
     this.response({
       res,
       message: "the account successfuly created",
-      data: _.pick(req.body, ["user_id", "incomeAmount", "type"]),
+      data: _.pick(req.body, ["user_id", "incomeAmount"]),
     })
   }
 
@@ -45,7 +45,7 @@ module.exports = new (class extends controller {
     this.response({
       res,
       message: "the account successfuly updated",
-      data: _.pick(req.body, ["user_id", "accountName", "type"]),
+      data: _.pick(req.body, ["user_id", "accountName"]),
     })
   }
 

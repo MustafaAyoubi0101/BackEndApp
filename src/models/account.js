@@ -8,7 +8,6 @@ const accountsSchema = new mongoose.Schema({
   },
   accountName: { type: String, required: true },
   notes: { type: String },
-  type: { type: String }
 });
 accountsSchema.plugin(timestamp);
 
