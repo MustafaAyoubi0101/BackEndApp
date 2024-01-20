@@ -17,8 +17,4 @@ router.post(
   controller.login
 );
 
-router.get('/', (req, res) => {
-  res.send('lksdfaj')
-})
-
 module.exports = router;
