@@ -8,7 +8,7 @@ const debug = require('debug')('app:main');
 module.exports = new (class extends controller {
 
   async getSavings(req, res) {
-    const savings = await this.Savings.find({user_id: req.query.userId});
+    const savings = await this.Savings.find({account_id: req.query.accountId});
     res.json(savings)
   }
 
@@ -18,13 +18,13 @@ module.exports = new (class extends controller {
   }
 
   async createSavings(req, res) {
-    const savings = await this.Savings(_.pick(req.body, ["user_id", "savingAmount", "savingMethod", "notes", "date"]))
+    const savings = await this.Savings(_.pick(req.body, ["account_id", "savingAmount", "savingMethod", "notes", "date"]))
     await savings.save();
 
     this.response({
       res,
       message: "the saving successfuly created",
-      data: _.pick(req.body, ["user_id", "savingAmount", "savingMethod", "notes", "date"]),
+      data: _.pick(req.body, ["account_id", "savingAmount", "savingMethod", "notes", "date"]),
     })
   }
 
@@ -47,7 +47,7 @@ module.exports = new (class extends controller {
     this.response({
       res,
       message: "the saving successfuly updated",
-      data: _.pick(req.body, ["user_id", "savingAmount", "savingMethod", "notes", "date"]),
+      data: _.pick(req.body, ["account_id", "savingAmount", "savingMethod", "notes", "date"]),
     })
   }
 

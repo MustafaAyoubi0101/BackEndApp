@@ -2,9 +2,9 @@ const mongoose = require('mongoose');
 const timestamp = require('mongoose-timestamp');
 
 const incomeSchema = new mongoose.Schema({
-  user_id: {
+  account_id: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: 'User'
+    ref: 'Account'
   },
   incomeAmount: { type: String, required: true },
   category: { type: String, default: "Other" },

@@ -2,9 +2,9 @@ const mongoose = require('mongoose');
 const timestamp = require('mongoose-timestamp');
 
 const savingsSchema = new mongoose.Schema({
-  user_id: {
+  account_id: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: 'User'
+    ref: 'Account'
   },
   savingAmount: { type: String, required: true },
   savingMethod: { type: String, defalut: "Others"},

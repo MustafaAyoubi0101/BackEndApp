@@ -8,24 +8,23 @@ const debug = require('debug')('app:main');
 module.exports = new (class extends controller {
 
   async getIncomes(req, res) {
-    const incomes = await this.Income.find({user_id: req.query.userId});
+    const incomes = await this.Income.find({account_id: req.query.accountId});
     res.json(incomes)
   }
 
   async getIncome(req, res) {
-    debug(req)
     const income = await this.Income.findById(req.params.id);
     res.json(income)
   }
 
   async createIncome(req, res) {
-    const newIncome = await this.Income(_.pick(req.body, ["user_id", "incomeAmount", "category", "paymentMethod", "notes", "date"]))
+    const newIncome = await this.Income(_.pick(req.body, ["account_id", "incomeAmount", "category", "paymentMethod", "notes", "date"]))
     await newIncome.save();
 
     this.response({
       res,
       message: "the income successfuly created",
-      data: _.pick(req.body, ["user_id", "incomeAmount", "category", "paymentMethod", "notes", "date"]),
+      data: _.pick(req.body, ["account_id", "incomeAmount", "category", "paymentMethod", "notes", "date"]),
     })
   }
 
@@ -49,7 +48,7 @@ module.exports = new (class extends controller {
     this.response({
       res,
       message: "the income successfuly updated",
-      data: _.pick(req.body, ["user_id", "incomeAmount", "category", "paymentMethod", "notes", "date"]),
+      data: _.pick(req.body, ["account_id", "incomeAmount", "category", "paymentMethod", "notes", "date"]),
     })
   }
 

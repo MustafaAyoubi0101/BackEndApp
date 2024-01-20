@@ -4,6 +4,7 @@ const User = require('./../models/user');
 const Income = require('../models/income');
 const Expenses = require('../models/expenses');
 const Savings = require('../models/savings');
+const Account = require('../models/account');
 
 module.exports = class {
   constructor() {
@@ -12,6 +13,7 @@ module.exports = class {
     this.Income = Income;
     this.Expenses = Expenses;
     this.Savings = Savings;
+    this.Account = Account;
   }
 
   validationBody(req,res){

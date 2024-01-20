@@ -8,7 +8,7 @@ const debug = require('debug')('app:main');
 module.exports = new (class extends controller {
 
   async getExpenses(req, res) {
-    const expenses = await this.Expenses.find({user_id: req.query.userId});
+    const expenses = await this.Expenses.find({account_id: req.query.accountId});
     res.json(expenses)
   }
 
@@ -18,13 +18,13 @@ module.exports = new (class extends controller {
   }
 
   async createExpenses(req, res) {
-    const expenses = await this.Expenses(_.pick(req.body, ["user_id", "expensesAmount", "category", "paymentMethod", "notes", "date"]))
+    const expenses = await this.Expenses(_.pick(req.body, ["account_id", "expensesAmount", "category", "paymentMethod", "notes", "date"]))
     await expenses.save();
 
     this.response({
       res,
       message: "the expenses successfuly created",
-      data: _.pick(req.body, ["user_id", "expensesAmount", "category", "paymentMethod", "notes", "date"]),
+      data: _.pick(req.body, ["account_id", "expensesAmount", "category", "paymentMethod", "notes", "date"]),
     })
   }
 
@@ -48,7 +48,7 @@ module.exports = new (class extends controller {
     this.response({
       res,
       message: "the expenses successfuly updated",
-      data: _.pick(req.body, ["user_id", "expensesAmount", "category", "paymentMethod", "notes", "date"]),
+      data: _.pick(req.body, ["account_id", "expensesAmount", "category", "paymentMethod", "notes", "date"]),
     })
   }
 
