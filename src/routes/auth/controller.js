@@ -16,17 +16,26 @@ module.exports = new (class extends controller {
     }
     // const {email, name, password} = req.body;
     // user = new this.User({email, name, password});
-    user = new this.User(_.pick(req.body, ["name", "email", "password"]));
+    user = new this.User(_.pick(req.body, ["name", "email", "password", "currentAccount"]));
 
     const salt = await bcrypt.genSalt(10);
     user.password = await bcrypt.hash(user.password, salt);
 
     await user.save();
 
+    // create Default Account
+    const account = await this.Account({accountName: "Default", userId: user._id})
+    await account.save();
+
+    // add currectAccount to current new user
+    const currentUser = await this.User.findById(user._id)
+    currentUser.currentAccount = account._id;
+    await currentUser.save()
+    console.log(user)
     this.response({
       res,
       message: "the user successfuly registered",
-      data: _.pick(user, ["_id", "name", "email"]),
+      data: _.pick(user, ["_id", "name", "email", "currentAccount"]),
     });
   }
 

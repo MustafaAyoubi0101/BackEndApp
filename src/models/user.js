@@ -6,6 +6,10 @@ const userSchema = new mongoose.Schema({
   name: { type: String, required: true},
   password: { type: String, required: true},
   isadmin: { type: Boolean, default: false},
+  currentAccount: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Account'
+  }
 });
 userSchema.plugin(timestamp);
 
