@@ -12,8 +12,8 @@ router.get(
   controller.me
 );
 
-router.post(
-  '/changeCurrentAccount',
+router.get(
+  '/changeCurrentAccount/:id',
   controller.changeCurrentAccount
 );
 
