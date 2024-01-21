@@ -2,11 +2,12 @@ const mongoose = require('mongoose');
 const timestamp = require('mongoose-timestamp');
 
 const paymentMethodSchema = new mongoose.Schema({
-  user_id: {
+  userId: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'User'
   },
-  name: { type: String, required: true },
+  paymentMethodName: { type: String, required: true },
+  paymentMethodName: { type: Number },
 });
 paymentMethodSchema.plugin(timestamp);
 

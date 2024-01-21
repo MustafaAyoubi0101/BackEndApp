@@ -8,7 +8,7 @@ const debug = require('debug')('app:main');
 module.exports = new (class extends controller {
 
   async getPaymentMethods(req, res) {
-    const paymentMethods = await this.PaymentMethod.find({ user_id: req.query.userId });
+    const paymentMethods = await this.PaymentMethod.find({ userId: req.query.userId });
     res.json(paymentMethods)
   }
 
@@ -18,13 +18,13 @@ module.exports = new (class extends controller {
   }
 
   async createPaymentMethod(req, res) {
-    const paymentMethod = await this.Account(_.pick(req.body, ["user_id", "name"]))
+    const paymentMethod = await this.Account(_.pick(req.body, ["userId", "paymentMethodName", "paymentMethodId"]))
     await paymentMethod.save();
 
     this.response({
       res,
       message: "the payment method successfuly created",
-      data: _.pick(req.body, ["user_id", "name"]),
+      data: _.pick(req.body, ["userId", "paymentMethodName", "paymentMethodId"]),
     })
   }
 
@@ -36,7 +36,7 @@ module.exports = new (class extends controller {
     };
     paymentMethod.set({
       ...req.body,
-      name: req.body.name,
+      paymentMethodName: req.body.paymentMethodName,
     })
 
     await paymentMethod.save();
@@ -44,7 +44,7 @@ module.exports = new (class extends controller {
     this.response({
       res,
       message: "the payment method successfuly updated",
-      data: _.pick(req.body, ["user_id", "name"]),
+      data: _.pick(req.body, ["userId", "paymentMethodName", "paymentMethodId"]),
     })
   }
 

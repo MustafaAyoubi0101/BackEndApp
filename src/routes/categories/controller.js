@@ -8,7 +8,7 @@ const debug = require('debug')('app:main');
 module.exports = new (class extends controller {
 
   async getCategories(req, res) {
-    const categories = await this.Category.find({ user_id: req.query.userId });
+    const categories = await this.Category.find({ userId: req.query.userId });
     res.json(categories)
   }
 
@@ -18,13 +18,13 @@ module.exports = new (class extends controller {
   }
 
   async createCategory(req, res) {
-    const category = await this.Account(_.pick(req.body, ["user_id", "name", "type"]))
+    const category = await this.Account(_.pick(req.body, ["userId", "categoryName", "categoryId", "type"]))
     await category.save();
 
     this.response({
       res,
       message: "the category successfuly created",
-      data: _.pick(req.body, ["user_id", "name", "type"]),
+      data: _.pick(req.body, ["userId", "categoryName", "categoryId", "type"]),
     })
   }
 
@@ -36,7 +36,8 @@ module.exports = new (class extends controller {
     };
     category.set({
       ...req.body,
-      name: req.body.name,
+      categoryName: req.body.categoryName,
+      categoryId: req.body.categoryId,
       type: req.body.type,
     })
 
@@ -45,7 +46,7 @@ module.exports = new (class extends controller {
     this.response({
       res,
       message: "the category successfuly updated",
-      data: _.pick(req.body, ["user_id", "name", "type"]),
+      data: _.pick(req.body, ["userId", "categoryName", "categoryId", "type"]),
     })
   }
 

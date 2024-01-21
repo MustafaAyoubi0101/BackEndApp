@@ -8,7 +8,7 @@ const debug = require('debug')('app:main');
 module.exports = new (class extends controller {
 
   async getAccounts(req, res) {
-    const accounts = await this.Account.find({user_id: req.query.userId});
+    const accounts = await this.Account.find({userId: req.query.userId});
     res.json(accounts)
   }
 
@@ -18,13 +18,13 @@ module.exports = new (class extends controller {
   }
 
   async createAccount(req, res) {
-    const account = await this.Account(_.pick(req.body, ["user_id", "accountName"]))
+    const account = await this.Account(_.pick(req.body, ["userId", "accountName"]))
     await account.save();
 
     this.response({
       res,
       message: "the account successfuly created",
-      data: _.pick(req.body, ["user_id", "incomeAmount"]),
+      data: _.pick(req.body, ["userId", "incomeAmount"]),
     })
   }
 
@@ -45,7 +45,7 @@ module.exports = new (class extends controller {
     this.response({
       res,
       message: "the account successfuly updated",
-      data: _.pick(req.body, ["user_id", "accountName"]),
+      data: _.pick(req.body, ["userId", "accountName"]),
     })
   }
 

@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 const timestamp = require('mongoose-timestamp');
 
 const accountsSchema = new mongoose.Schema({
-  user_id: {
+  useId: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'User'
   },

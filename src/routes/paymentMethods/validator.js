@@ -4,10 +4,10 @@ const check = expressValidator.check;
 module.exports = new class {
   incomeValidator() {
     return [
-      check('name')
+      check('paymentMethodName')
         .not()
         .isEmpty()
-        .withMessage('Name is invalid'),
+        .withMessage('Payment method name is invalid'),
     ]
   }
 }
