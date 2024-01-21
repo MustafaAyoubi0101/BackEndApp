@@ -12,4 +12,9 @@ router.get(
   controller.me
 );
 
+router.post(
+  '/changeCurrentAccount',
+  controller.changeCurrentAccount
+);
+
 module.exports = router;

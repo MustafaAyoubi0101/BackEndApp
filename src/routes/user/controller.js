@@ -11,5 +11,13 @@ module.exports = new (class extends controller {
     this.response({ res, data: _.pick(req.user, ["_id", "name", "email", "currentAccount"]) })
   }
 
+  async changeCurrentAccount(req, res) {
+    const user = await this.User.findById(req.body.userId);
+    user.currentAccount = req.body.accountId;
+    await user.save();
+
+    this.response({ res, data: _.pick(req.user, ["_id", "name", "email", "currentAccount"]), message: "successfully updated" })
+  }
+
 })();
 
