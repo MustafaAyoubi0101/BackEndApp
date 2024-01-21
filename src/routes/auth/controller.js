@@ -31,11 +31,11 @@ module.exports = new (class extends controller {
     const currentUser = await this.User.findById(user._id)
     currentUser.currentAccount = account._id;
     await currentUser.save()
-    console.log(user)
+    
     this.response({
       res,
       message: "the user successfuly registered",
-      data: _.pick(user, ["_id", "name", "email", "currentAccount"]),
+      data: _.pick(currentUser, ["_id", "name", "email", "currentAccount"]),
     });
   }
 
