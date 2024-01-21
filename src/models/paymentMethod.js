@@ -7,7 +7,6 @@ const paymentMethodSchema = new mongoose.Schema({
     ref: 'User'
   },
   paymentMethodName: { type: String, required: true },
-  paymentMethodName: { type: Number },
 });
 paymentMethodSchema.plugin(timestamp);
 

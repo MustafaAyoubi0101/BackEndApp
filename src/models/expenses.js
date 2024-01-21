@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 const timestamp = require('mongoose-timestamp');
 
 const expensesSchema = new mongoose.Schema({
-  account_id: {
+  accountId: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'Account'
   },

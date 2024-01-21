@@ -18,13 +18,13 @@ module.exports = new (class extends controller {
   }
 
   async createSavings(req, res) {
-    const savings = await this.Savings(_.pick(req.body, ["account_id", "savingAmount", "savingMethod", "notes", "date"]))
+    const savings = await this.Savings(_.pick(req.body, ["account_id", "savingAmount", "paymentMethod", "notes", "date"]))
     await savings.save();
 
     this.response({
       res,
       message: "the saving successfuly created",
-      data: _.pick(req.body, ["account_id", "savingAmount", "savingMethod", "notes", "date"]),
+      data: _.pick(req.body, ["account_id", "savingAmount", "paymentMethod", "notes", "date"]),
     })
   }
 
@@ -38,7 +38,7 @@ module.exports = new (class extends controller {
       ...req.body,
       savingAmount: req.body.savingAmount,
       notes: req.body.notes,
-      savingMethod: req.body.savingMethod,
+      paymentMethod: req.body.paymentMethod,
       date: req.body.date
     })
 
@@ -47,7 +47,7 @@ module.exports = new (class extends controller {
     this.response({
       res,
       message: "the saving successfuly updated",
-      data: _.pick(req.body, ["account_id", "savingAmount", "savingMethod", "notes", "date"]),
+      data: _.pick(req.body, ["account_id", "savingAmount", "paymentMethod", "notes", "date"]),
     })
   }
 

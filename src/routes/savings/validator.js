@@ -8,7 +8,7 @@ module.exports = new class {
         .not()
         .isEmpty()
         .withMessage('saving amount is invalid'),
-      check('savingMethod')
+      check('paymentMethod')
         .not()
         .isEmpty()
         .withMessage('Saving method cant be empty'),

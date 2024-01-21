@@ -18,13 +18,13 @@ module.exports = new (class extends controller {
   }
 
   async createPaymentMethod(req, res) {
-    const paymentMethod = await this.Account(_.pick(req.body, ["userId", "paymentMethodName", "paymentMethodId"]))
+    const paymentMethod = await this.Account(_.pick(req.body, ["userId", "paymentMethodName"]))
     await paymentMethod.save();
 
     this.response({
       res,
       message: "the payment method successfuly created",
-      data: _.pick(req.body, ["userId", "paymentMethodName", "paymentMethodId"]),
+      data: _.pick(req.body, ["userId", "paymentMethodName"]),
     })
   }
 
@@ -44,7 +44,7 @@ module.exports = new (class extends controller {
     this.response({
       res,
       message: "the payment method successfuly updated",
-      data: _.pick(req.body, ["userId", "paymentMethodName", "paymentMethodId"]),
+      data: _.pick(req.body, ["userId", "paymentMethodName"]),
     })
   }
 
