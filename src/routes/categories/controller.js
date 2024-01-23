@@ -12,25 +12,25 @@ module.exports = new (class extends controller {
       return res.status(400).json({ error: 'userId parameter is missing' });
     }
 
-    const page = parseInt(req.query.page) || 1;
+    const page = parseInt(req.query.page) || 0;
     const size = parseInt(req.query.size) || 10;
     const sort = parseInt(req.query.sort) || -1;
 
     try {
-      const [categories, totalCategories] = await Promise.all([
+      const [data, totalEntity] = await Promise.all([
         this.Category
           .find({ userId: req.query.userId })
           .sort({ createdAt: sort })
-          .skip((page - 1) * size)
+          .skip((page * size))
           .limit(size),
         this.Category.countDocuments({ userId: req.query.userId })
       ]);
 
       const response = {
-        categories,
-        totalCategories,
+        data,
+        totalEntity,
         currentPage: page,
-        totalPages: Math.ceil(totalCategories / size)
+        totalPages: Math.ceil(totalEntity / size)
       };
 
       res.json(response);
