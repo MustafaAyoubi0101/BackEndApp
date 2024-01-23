@@ -7,8 +7,7 @@ const categorySchema = new mongoose.Schema({
     ref: 'User'
   },
   categoryName: { type: String, required: true },
-  categoryId: { type: Number },
-  type: { type: String, required: true, enum: ['Expenses, Income'] },
+  type: { type: String, required: true },
 });
 categorySchema.plugin(timestamp);
 

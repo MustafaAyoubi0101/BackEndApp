@@ -15,14 +15,14 @@ router.get(
 
 router.post(
     '/',
-    validator.incomeValidator(),
+    validator.categoryValidator(),
     controller.validate,
     controller.createCategory
 )
 
 router.put(
     '/',
-    validator.incomeValidator(),
+    validator.categoryValidator(),
     controller.validate,
     controller.updateCategory
 )

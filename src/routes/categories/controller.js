@@ -18,13 +18,13 @@ module.exports = new (class extends controller {
   }
 
   async createCategory(req, res) {
-    const category = await this.Account(_.pick(req.body, ["userId", "categoryName", "categoryId", "type"]))
+    const category = await this.Category(_.pick(req.body, ["userId", "categoryName", "type"]))
     await category.save();
 
     this.response({
       res,
       message: "the category successfuly created",
-      data: _.pick(req.body, ["userId", "categoryName", "categoryId", "type"]),
+      data: _.pick(req.body, ["userId", "categoryName", "type"]),
     })
   }
 
@@ -37,7 +37,6 @@ module.exports = new (class extends controller {
     category.set({
       ...req.body,
       categoryName: req.body.categoryName,
-      categoryId: req.body.categoryId,
       type: req.body.type,
     })
 
@@ -46,7 +45,7 @@ module.exports = new (class extends controller {
     this.response({
       res,
       message: "the category successfuly updated",
-      data: _.pick(req.body, ["userId", "categoryName", "categoryId", "type"]),
+      data: _.pick(req.body, ["userId", "categoryName", "type"]),
     })
   }
 

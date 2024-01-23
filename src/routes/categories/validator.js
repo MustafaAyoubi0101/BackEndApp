@@ -2,7 +2,7 @@ const expressValidator = require('express-validator');
 const check = expressValidator.check;
 
 module.exports = new class {
-  incomeValidator() {
+  categoryValidator() {
     return [
       check('categoryName')
         .not()
