@@ -2,15 +2,10 @@ const express = require('express');
 const cors = require('cors')
 const app = express();
 
-app.use(cors())
-const mongoose = require('mongoose');
-const debug = require('debug')("app:main");
-const config = require('config');
-const winston = require('winston');
 
 const router = require('./src/routes');
 
-require('./startup/config')(app,express);
+require('./startup/config')(app,express,cors);
 require('./startup/db')();
 require('./startup/logging')();
 
