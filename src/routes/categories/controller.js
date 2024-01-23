@@ -8,6 +8,7 @@ const debug = require('debug')('app:main');
 module.exports = new (class extends controller {
 
   async getCategories(req, res) {
+    if(!req.query.userId) return;
     const categories = await this.Category.find({ userId: req.query.userId });
     res.json(categories)
   }
