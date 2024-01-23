@@ -11,35 +11,35 @@ module.exports = new (class extends controller {
     if (!req.query.userId) {
       return res.status(400).json({ error: 'userId parameter is missing' });
     }
-  
-    const page = parseInt(req.query.page) || 1; // Default to page 1 if not provided
-    const size = parseInt(req.query.size) || 10; // Default to 10 items per page
-    const sort = parseInt(req.query.sort) || -1; // Default to -1 sort
-  
+
+    const page = parseInt(req.query.page) || 1;
+    const size = parseInt(req.query.size) || 10;
+    const sort = parseInt(req.query.sort) || -1;
+
     try {
       const [categories, totalCategories] = await Promise.all([
         this.Category
           .find({ userId: req.query.userId })
-          .sort({ createdAt: sort }) // Sort by 'createdAt' field in descending order
+          .sort({ createdAt: sort })
           .skip((page - 1) * size)
           .limit(size),
         this.Category.countDocuments({ userId: req.query.userId })
       ]);
-  
+
       const response = {
         categories,
         totalCategories,
         currentPage: page,
         totalPages: Math.ceil(totalCategories / size)
       };
-  
+
       res.json(response);
     } catch (error) {
       console.error('Error fetching categories:', error);
       res.status(500).json({ error: 'Internal server error' });
     }
   }
-  
+
 
   async getCategory(req, res) {
     const category = await this.Category.findById(req.params.id);
