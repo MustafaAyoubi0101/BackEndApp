@@ -8,84 +8,95 @@ const debug = require('debug')('app:main');
 module.exports = new (class extends controller {
 
   async getCategories(req, res) {
-    if (!req.query.userId) {
-      return res.status(400).json({ error: 'userId parameter is missing' });
-    }
-
     const page = parseInt(req.query.page) || 0;
     const size = parseInt(req.query.size) || 10;
     const sort = parseInt(req.query.sort) || -1;
 
-    try {
-      const [data, totalEntity] = await Promise.all([
-        this.Category
-          .find({ userId: req.query.userId })
-          .sort({ createdAt: sort })
-          .skip((page * size))
-          .limit(size),
-        this.Category.countDocuments({ userId: req.query.userId })
-      ]);
+    const name = req.query.name;
+    const type = req.query.type;
 
-      const response = {
-        data,
-        totalEntity,
-        currentPage: page,
-        totalPages: Math.ceil(totalEntity / size)
-      };
+    const searchCondition = {
+      userId: req.query.userId,
+      ...(name && { categoryName: { $regex: new RegExp(name, 'i') } }),
+      ...(type && { type: type })
+    };
 
-      res.json(response);
-    } catch (error) {
-      console.error('Error fetching categories:', error);
-      res.status(500).json({ error: 'Internal server error' });
-    }
+    await this.handleAsyncOperation(
+      res,
+      async () => {
+        const [data, totalEntity] = await Promise.all([
+          this.Category
+            .find(searchCondition)
+            .sort({ createdAt: sort })
+            .skip((page * size))
+            .limit(size),
+          this.Category.countDocuments(searchCondition)
+        ]);
+
+        return {
+          data,
+          totalEntity,
+          currentPage: page,
+          totalPages: Math.ceil(totalEntity / size)
+        };
+      },
+      'Categories fetched successfully',
+      'Error fetching categories'
+    );
   }
 
-
   async getCategory(req, res) {
-    const category = await this.Category.findById(req.params.id);
-    res.json(category)
+    await this.handleAsyncOperation(
+      res,
+      async () => await this.Category.findById(req.params.id),
+      'Category fetched successfully',
+      'Error fetching category'
+    );
   }
 
   async createCategory(req, res) {
-    const category = await this.Category(_.pick(req.body, ["userId", "categoryName", "type"]))
-    await category.save();
-
-    this.response({
+    await this.handleAsyncOperation(
       res,
-      message: "the category successfuly created",
-      data: _.pick(req.body, ["userId", "categoryName", "type"]),
-    })
+      async () => {
+        const category = await this.Category(_.pick(req.body, ["userId", "categoryName", "type"]));
+        await category.save();
+        return _.pick(req.body, ["userId", "categoryName", "type"]);
+      },
+      'Category created successfully',
+      'Error creating category'
+    );
   }
 
   async updateCategory(req, res) {
-    const category = await this.Category.findById(req.query.id)
-    if (!category) {
-      this.response({ res })
-      return;
-    };
-    category.set({
-      ...req.body,
-      categoryName: req.body.categoryName,
-      type: req.body.type,
-    })
-
-    await category.save();
-
-    this.response({
+    await this.handleAsyncOperation(
       res,
-      message: "the category successfuly updated",
-      data: _.pick(req.body, ["userId", "categoryName", "type"]),
-    })
+      async () => {
+        const category = await this.Category.findById(req.query.id);
+        if (!category) {
+          this.response({ res });
+          return;
+        }
+
+        category.set({
+          ...req.body,
+          categoryName: req.body.categoryName,
+          type: req.body.type,
+        });
+
+        await category.save();
+        return _.pick(req.body, ["userId", "categoryName", "type"]);
+      },
+      'Category updated successfully',
+      'Error updating category'
+    );
   }
 
   async removeCategory(req, res) {
-    const result = await this.Category.findByIdAndRemove(req.query.id);
-
-    this.response({
+    await this.handleAsyncOperation(
       res,
-      message: "the category successfuly removed",
-      data: result,
-    })
+      async () => await this.Category.findByIdAndRemove(req.query.id),
+      'Category removed successfully',
+      'Error removing category'
+    );
   }
-
 })();

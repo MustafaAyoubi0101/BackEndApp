@@ -20,6 +20,20 @@ module.exports = class {
     this.PaymentMethod = PaymentMethod;
   }
 
+  handleError(res, error, message = 'Internal server error') {
+    console.error(message, error);
+    res.status(500).json({ error: message });
+  }
+
+  async handleAsyncOperation(res, operation, successMessage = 'Success', errorMessage = 'Error') {
+    try {
+      const result = await operation();
+      this.response({ res, message: successMessage, data: result });
+    } catch (error) {
+      this.handleError(res, error, errorMessage);
+    }
+  }
+
   validationBody(req,res){
     const result = validationResult(req);
     if(!result.isEmpty()){
