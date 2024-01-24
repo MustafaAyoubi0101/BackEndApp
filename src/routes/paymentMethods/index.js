@@ -15,14 +15,14 @@ router.get(
 
 router.post(
     '/',
-    validator.incomeValidator(),
+    validator.paymentMethodValidator(),
     controller.validate,
     controller.createPaymentMethod
 )
 
 router.put(
     '/',
-    validator.incomeValidator(),
+    validator.paymentMethodValidator(),
     controller.validate,
     controller.updatePaymentMethod
 )
