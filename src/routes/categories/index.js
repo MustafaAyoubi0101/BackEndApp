@@ -5,7 +5,6 @@ const validator = require('./validator');
 
 router.get(
     '/',
-    controller.validate,
     controller.getCategories
 )
 
