@@ -6,7 +6,7 @@ const incomeSchema = new mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: 'Account'
   },
-  incomeAmount: { type: String, required: true },
+  incomeAmount: { type: Number, required: true },
   category: { type: String, default: "Other" },
   paymentMethod: { type: String, defalut: "Others"},
   note: { type: String },

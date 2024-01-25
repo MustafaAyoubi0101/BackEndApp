@@ -7,23 +7,25 @@ module.exports = new class {
       check('accountId')
         .not()
         .isEmpty()
-        .withMessage('account id cant be empty'),
+        .withMessage('account ID amount is required.'),
       check('incomeAmount')
         .not()
         .isEmpty()
-        .withMessage('Income amount is invalid'),
+        .withMessage('Income amount is required.')
+        .isNumeric()
+        .withMessage('Income amount must be a numeric value.'),
       check('category')
         .not()
         .isEmpty()
-        .withMessage('category cant be empty'),
+        .withMessage('category amount is required.'),
       check('paymentMethod')
         .not()
         .isEmpty()
-        .withMessage('Payment method cant be empty'),
+        .withMessage('Payment method amount is required.'),
       check('date')
         .not()
         .isEmpty()
-        .withMessage('date cant be empty'),
+        .withMessage('date amount is required.'),
     ]
   }
 }
