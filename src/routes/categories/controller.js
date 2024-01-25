@@ -96,4 +96,49 @@ module.exports = new (class extends controller {
       'Error removing category'
     );
   }
+
+  async getIncomeCategories(req, res) {
+    console.log(req)
+    const searchCondition = {userId: req.query.userId, type: 'INCOME'}
+
+    await this.handleAsyncOperation(
+      res,
+      async () => {
+        const [data, totalEntity] = await Promise.all([
+          this.Category.find(searchCondition),
+          this.Category.countDocuments(searchCondition)
+        ]);
+
+        return {
+          data,
+          totalEntity,
+        };
+      },
+      'Income categories fetched successfully',
+      'Error fetching income categories'
+    );
+  }
+
+  async getExpensesCategories(req, res) {
+    console.log(req)
+    const searchCondition = {userId: req.query.userId, type: 'EXPENSES'}
+
+    await this.handleAsyncOperation(
+      res,
+      async () => {
+        const [data, totalEntity] = await Promise.all([
+          this.Category.find(searchCondition),
+          this.Category.countDocuments(searchCondition)
+        ]);
+
+        return {
+          data,
+          totalEntity,
+        };
+      },
+      'Expenses categories fetched successfully',
+      'Error fetching expenses categories'
+    );
+  }
+
 })();

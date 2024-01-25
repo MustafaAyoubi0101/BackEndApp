@@ -3,9 +3,20 @@ const router = express.Router();
 const controller = require('./controller');
 const validator = require('./validator');
 
+
 router.get(
     '/',
     controller.getCategories
+)
+
+router.get(
+    '/income',
+    controller.getIncomeCategories
+)
+
+router.get(
+    '/expenses',
+    controller.getExpensesCategories
 )
 
 router.get(
@@ -31,5 +42,7 @@ router.delete(
     '/',
     controller.removeCategory
 )
+
+
 
 module.exports = router;
