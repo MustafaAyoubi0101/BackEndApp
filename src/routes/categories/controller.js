@@ -98,7 +98,6 @@ module.exports = new (class extends controller {
   }
 
   async getIncomeCategories(req, res) {
-    console.log(req)
     const searchCondition = {userId: req.query.userId, type: 'INCOME'}
 
     await this.handleAsyncOperation(
