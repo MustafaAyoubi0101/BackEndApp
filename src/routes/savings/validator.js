@@ -4,18 +4,24 @@ const check = expressValidator.check;
 module.exports = new class {
   savingsValidator() {
     return [
+      check('accountId')
+        .not()
+        .isEmpty()
+        .withMessage('account ID amount is required.'),
       check('savingAmount')
         .not()
         .isEmpty()
-        .withMessage('saving amount is invalid'),
+        .withMessage('Saving amount is required.')
+        .isNumeric()
+        .withMessage('Saving amount must be a numeric value.'),
       check('paymentMethod')
         .not()
         .isEmpty()
-        .withMessage('Saving method cant be empty'),
+        .withMessage('Payment method amount is required.'),
       check('date')
         .not()
         .isEmpty()
-        .withMessage('date cant be empty'),
+        .withMessage('date amount is required.'),
     ]
   }
 }

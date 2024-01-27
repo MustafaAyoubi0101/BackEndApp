@@ -12,7 +12,7 @@ module.exports = new (class extends controller {
     const note = req.query.note;
 
     const searchCondition = {
-      account_id: req.query.accountId,
+      accountId: req.query.accountId,
       ...(note && { note: { $regex: new RegExp(note, 'i') } }),
     };
 

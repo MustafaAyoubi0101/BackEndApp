@@ -8,7 +8,7 @@ const savingsSchema = new mongoose.Schema({
   },
   savingAmount: { type: String, required: true },
   paymentMethod: { type: String, defalut: "Others"},
-  notes: { type: String },
+  note: { type: String },
   date: { type: Date, default: Date.now },
 });
 savingsSchema.plugin(timestamp);
