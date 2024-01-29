@@ -55,9 +55,9 @@ module.exports = new (class extends controller {
     await this.handleAsyncOperation(
       res,
       async () => {
-        const category = await this.Category(_.pick(req.body, ["userId", "categoryName", "type"]));
+        const category = await this.Category(_.pick(req.body, ["userId", "categoryName", "type", "image"]));
         await category.save();
-        return _.pick(req.body, ["userId", "categoryName", "type"]);
+        return _.pick(req.body, ["userId", "categoryName", "type", "image"]);
       },
       'Category created successfully',
       'Error creating category'
@@ -78,10 +78,11 @@ module.exports = new (class extends controller {
           ...req.body,
           categoryName: req.body.categoryName,
           type: req.body.type,
+          image: req.body.image,
         });
 
         await category.save();
-        return _.pick(req.body, ["userId", "categoryName", "type"]);
+        return _.pick(req.body, ["userId", "categoryName", "type", "image"]);
       },
       'Category updated successfully',
       'Error updating category'

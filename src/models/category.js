@@ -8,6 +8,7 @@ const categorySchema = new mongoose.Schema({
   },
   categoryName: { type: String, required: true },
   type: { type: String, required: true },
+  image: { type: String, required: true },
 });
 categorySchema.plugin(timestamp);
 

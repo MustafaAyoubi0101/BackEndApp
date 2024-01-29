@@ -12,6 +12,10 @@ module.exports = new class {
         .not()
         .isEmpty()
         .withMessage('Type is invalid'),
+      check('image')
+        .not()
+        .isEmpty()
+        .withMessage('image is invalid'),
     ]
   }
 }
