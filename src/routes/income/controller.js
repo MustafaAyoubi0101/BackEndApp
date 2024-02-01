@@ -6,7 +6,7 @@ module.exports = new (class extends controller {
 
   async getIncomes(req, res) {
     const page = parseInt(req.query.page) || 0;
-    const size = parseInt(req.query.size) || 10;
+    const size = parseInt(req.query.size);
     const sort = parseInt(req.query.sort) || -1;
 
     const note = req.query.note;

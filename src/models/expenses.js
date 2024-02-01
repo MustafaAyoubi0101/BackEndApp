@@ -6,7 +6,7 @@ const expensesSchema = new mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: 'Account'
   },
-  expensesAmount: { type: String, required: true },
+  expensesAmount: { type: Number, required: true },
   category: { type: String, default: "Other" },
   paymentMethod: { type: String, defalut: "Others"},
   note: { type: String },

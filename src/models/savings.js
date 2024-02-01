@@ -6,7 +6,7 @@ const savingsSchema = new mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: 'Account'
   },
-  savingAmount: { type: String, required: true },
+  savingAmount: { type: Number, required: true },
   paymentMethod: { type: String, defalut: "Others"},
   note: { type: String },
   date: { type: Date, default: Date.now },
